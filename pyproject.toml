@@ -1,0 +1,20 @@
+[project]
+name = "job-application-copilot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.141.1",
+    "pydantic-ai>=2.33.0",
+    "python-dotenv>=1.2.3",
+    "sqlalchemy>=2.0.52",
+    "uvicorn[standard]>=0.52.4",
+]
+
+[project.scripts]
+job-application-copilot = "job_application_copilot:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"

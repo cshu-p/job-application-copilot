@@ -1,0 +1,38 @@
+#root {
+  width: 100%;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.top-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.input-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-panel textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-panel button {
+  align-self: flex-start;
+}
+
+.history-panel {
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
