@@ -36,3 +36,99 @@ main {
   max-height: calc(100vh - 2rem);
   overflow-y: auto;
 }
+
+.application-draft {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.draft-experience {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.draft-experience h3 {
+  margin: 0 0 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+.draft-experience p {
+  margin-bottom: 1rem;
+}
+
+.draft-bullet {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 7rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  font: inherit;
+  color: var(--text-h);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  resize: vertical;
+}
+
+.draft-bullet:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.draft-title {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0.5rem 0 0.75rem;
+  padding: 0.75rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--text-h);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+
+.career-source-text {
+  max-height: 24rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: 1rem;
+  font: inherit;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.legacy-analysis {
+  margin-top: 2rem;
+  padding: 1rem;
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.legacy-analysis summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.legacy-analysis .input-panel {
+  margin: 1rem 0;
+}
+
+@media (max-width: 760px) {
+  .top-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .history-panel {
+    position: static;
+    max-height: none;
+  }
+}

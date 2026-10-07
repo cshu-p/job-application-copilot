@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 interface BulletRewrite {
   original_point: string;
   suggested_rewrite: string;
@@ -26,6 +28,28 @@ interface Props {
   analysis: Analysis;
   usage: Usage;
 }
+
+function BulletEditor({ bullet }: { bullet: BulletRewrite }) {
+  const [editedText, setEditedText] = useState(bullet.suggested_rewrite);
+
+  return (
+    <div>
+      <p><strong>Original:</strong> {bullet.original_point}</p>
+
+      <label>
+        Suggested rewrite:
+        <textarea
+          value={editedText}
+          onChange={(event) => setEditedText(event.target.value)}
+          rows={4}
+        />
+      </label>
+
+      <p><strong>Why:</strong> {bullet.reason}</p>
+    </div>
+  );
+}
+
 
 function AnalysisResult({ analysis, usage }: Props) {
   return (
@@ -80,11 +104,7 @@ function AnalysisResult({ analysis, usage }: Props) {
 
       <h3>Bullet Rewrites</h3>
       {analysis.bullet_rewrites.map((item, index) => (
-        <div key={index}>
-          <p><strong>Original:</strong> {item.original_point}</p>
-          <p><strong>Suggested:</strong> {item.suggested_rewrite}</p>
-          <p><strong>Why:</strong> {item.reason}</p>
-        </div>
+        <BulletEditor key={index} bullet={item} />
       ))}
 
       <h3>Cover Letter Draft</h3>
