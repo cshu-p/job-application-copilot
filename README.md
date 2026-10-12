@@ -118,6 +118,23 @@ Two manual evaluation examples record expected behavior and observations:
 
 Both cases passed with minor wording corrections after human review. These are manual observations, not automated tests or a guarantee of future generation accuracy.
 
+## Automated Tests
+
+From the project root:
+
+```bash
+uv sync --dev
+uv run pytest -q
+```
+
+The nine tests in `test/` cover career-source loading rules, draft creation and retrieval, updates without duplicate records, missing records, invalid selections without database writes, and source access restrictions.
+
+API tests use FastAPI's TestClient, a separate temporary SQLite database for each test, and fictional career sources. They do not call the model, require a real OpenAI API key, or read the private career profile. Uvicorn and the frontend do not need to be running.
+
+Database table creation runs during the app's lifespan startup so the test fixture can replace the database engine and session factory before startup. Model initialization is deferred until an agent is used.
+
+These tests validate application behavior; the manual evaluations above assess generated content and still require human judgment.
+
 To check the frontend build, run from the project root:
 
 ```bash

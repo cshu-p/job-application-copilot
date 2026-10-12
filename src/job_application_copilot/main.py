@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from pathlib import Path
 from datetime import UTC, datetime
+from contextlib import asynccontextmanager
 
 from .career_sources import (
     CareerSource,
@@ -18,7 +19,12 @@ from .career_sources import (
 
 load_dotenv()
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    Base.metadata.create_all(bind=engine)
+    yield
+
+app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -27,8 +33,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-Base.metadata.create_all(bind=engine)
 
 class AnalysisRequest(BaseModel):
     job_description: str
@@ -87,6 +91,7 @@ class SavedDraftSummary(BaseModel):
 
 agent = Agent(
     "openai:gpt-5.6-luna",
+    defer_model_check=True,
     output_type=JobAnalysis,
     instructions=(
         "You are a job application assistant. "
@@ -118,6 +123,7 @@ agent = Agent(
 
 draft_agent = Agent(
     "openai:gpt-5.6-luna",
+    defer_model_check=True,
     output_type=ApplicationDraft,
     instructions=(
         "Prepare resume content tailored to the supplied job description. "
